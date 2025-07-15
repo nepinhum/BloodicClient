@@ -53,6 +53,10 @@ public class BloodicClient implements ModInitializer{
 				if(key == hack.getKey()) hack.toggle();
 			}
 		}
+		
+		/*if(key == GLFW.GLFW_KEY_RIGHT_SHIFT) {
+			MC.setScreen(inGameHud.getClickGui());
+		}*/
 	}
 	
 	public void onUpdate(){

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.bloodic.BloodicClient;
+import net.bloodic.hack.Hack.Category;
 import net.bloodic.hacks.AutoSprint;
 import net.bloodic.hacks.Flight;
 
@@ -26,6 +27,18 @@ public class HackManager{
 		}
 		
 		return enabled;
+	}
+	
+	public List<Hack> getHacksInCategory(Category category){
+		List<Hack> categoryHacks = new ArrayList<>();
+		
+		for(Hack hack : hacks) {
+			if(hack.getCategory() == category) {
+				categoryHacks.add(hack);
+			}
+		}
+		
+		return categoryHacks;
 	}
 	
 	private void addHacks(){

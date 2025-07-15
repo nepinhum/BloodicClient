@@ -16,11 +16,17 @@ public class Hack{
 	private boolean enabled;
 	
 	public enum Category{
-		COMBAT,
-		MOVEMENT,
-		WORLD,
-		RENDER,
-		EXPLOIT
+		COMBAT("Combat"),
+		MOVEMENT("Movement"),
+		WORLD("World"),
+		RENDER("Render"),
+		EXPLOIT("Exploit");
+		
+		public String name;
+		
+		private Category(String name) {
+			this.name = name;
+		}
 	}
 	
 	public Hack(String name, String description, Category category, int key){
