@@ -13,13 +13,17 @@ public class Flight extends Hack{
 	@Override
 	public void onUpdate(){
 		// well, for test
-		MC.player.getAbilities().allowFlying = true;
-		MC.player.getAbilities().flying = true;
+		if (MC.player != null) {
+			MC.player.getAbilities().allowFlying = true;
+			MC.player.getAbilities().flying = true;
+		}
 	}
 	
 	@Override
 	protected void onDisable(){
-		MC.player.getAbilities().allowFlying = false;
-		MC.player.getAbilities().flying = false;
+        if (MC.player != null) {
+            MC.player.getAbilities().allowFlying = false;
+			MC.player.getAbilities().flying = false;
+        }
 	}
 }

@@ -1,5 +1,6 @@
 package net.bloodic;
 
+import net.minecraft.client.gui.DrawContext;
 import org.lwjgl.glfw.GLFW;
 
 import net.bloodic.hack.Hack;
@@ -42,9 +43,9 @@ public class BloodicClient implements ModInitializer{
 	public static boolean isDEBUG(){
 		return DEBUG;
 	}
-	
-	public void onRenderGUI(MatrixStack matrices, float partialTicks){
-		inGameHud.renderGUI(matrices, partialTicks);
+
+	public void onRenderGUI(DrawContext context, float tickDelta) {
+		inGameHud.renderGUI(context, tickDelta);
 	}
 	
 	public void onKeyPress(int key, int action){

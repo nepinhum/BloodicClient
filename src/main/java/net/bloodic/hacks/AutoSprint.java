@@ -13,10 +13,15 @@ public class AutoSprint extends Hack{
 	@Override
 	public void onUpdate(){
 		// well, for test
-		MC.player.setSprinting(true);
+		if (MC.player != null) {
+			MC.player.setSprinting(true);
+		}
 	}
 	
 	@Override
 	protected void onDisable(){
+		if (MC.player != null) {
+			MC.player.setSprinting(false);
+		}
 	}
 }

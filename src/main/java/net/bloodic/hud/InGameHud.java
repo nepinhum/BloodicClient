@@ -1,20 +1,15 @@
 package net.bloodic.hud;
 
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
-public class InGameHud{
-	
-	private HackListHud listHud;
-	//private ClickGui clickGui;
-	
-	public InGameHud(){
-		listHud = new HackListHud();
-		//clickGui = new ClickGui();
+public class InGameHud {
+	private final HackListHud listHud;
+
+	public InGameHud() {
+		this.listHud = new HackListHud();
 	}
-	
-	public void renderGUI(MatrixStack matrices, float partialTicks){
-		if(listHud != null){
-			listHud.render(matrices, partialTicks);
-		}
-	}
+
+	public void renderGUI(DrawContext context, float tickDelta) {
+        listHud.render(context, tickDelta);
+    }
 }
