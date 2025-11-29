@@ -8,32 +8,36 @@ import net.bloodic.hack.Hack.Category;
 import net.bloodic.hacks.AutoSprint;
 import net.bloodic.hacks.Flight;
 
-public class HackManager{
-	
+public class HackManager
+{
 	private List<Hack> hacks = new ArrayList<>();
 	
-	public HackManager(BloodicClient client){
+	public HackManager(BloodicClient client)
+	{
 		addHacks();
 	}
 	
-	public List<Hack> getHacks(){
+	public List<Hack> getHacks()
+	{
 		return hacks;
 	}
 	
-	public List<Hack> getEnabledHacks(){
+	public List<Hack> getEnabledHacks()
+	{
 		List<Hack> enabled = new ArrayList<>();
-		for(Hack hack : hacks){
+		for (Hack hack : hacks) {
 			if(hack.isEnabled()) enabled.add(hack);
 		}
 		
 		return enabled;
 	}
 	
-	public List<Hack> getHacksInCategory(Category category){
+	public List<Hack> getHacksInCategory(Category category)
+	{
 		List<Hack> categoryHacks = new ArrayList<>();
 		
-		for(Hack hack : hacks) {
-			if(hack.getCategory() == category) {
+		for (Hack hack : hacks) {
+			if (hack.getCategory() == category) {
 				categoryHacks.add(hack);
 			}
 		}
@@ -41,7 +45,8 @@ public class HackManager{
 		return categoryHacks;
 	}
 	
-	private void addHacks(){
+	private void addHacks()
+	{
 		hacks.add(new Flight());
 		hacks.add(new AutoSprint());
 	}

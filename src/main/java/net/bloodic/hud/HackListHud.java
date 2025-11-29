@@ -9,11 +9,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 
-public class HackListHud {
+public class HackListHud
+{
 	private final BloodicClient CLIENT = BloodicClient.INSTANCE;
 	private final MinecraftClient MC = MinecraftClient.getInstance();
 
-	public void render(DrawContext context, float tickDelta) {
+	public void render(DrawContext context, float tickDelta)
+	{
 		int index = 0;
 		int screenWidth = MC.getWindow().getScaledWidth();
 		TextRenderer textRenderer = MC.textRenderer;

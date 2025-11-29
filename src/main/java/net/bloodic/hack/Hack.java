@@ -2,9 +2,10 @@ package net.bloodic.hack;
 
 import net.bloodic.BloodicClient;
 import net.minecraft.client.MinecraftClient;
+import net.bloodic.event.EventManager;
 
-public class Hack{
-	
+public class Hack
+{
 	protected static final BloodicClient CL = BloodicClient.INSTANCE;
 	protected static final MinecraftClient MC = BloodicClient.MC;
 	
@@ -15,7 +16,8 @@ public class Hack{
 	
 	private boolean enabled;
 	
-	public enum Category{
+	public enum Category
+	{
 		COMBAT("Combat"),
 		MOVEMENT("Movement"),
 		WORLD("World"),
@@ -24,55 +26,70 @@ public class Hack{
 		
 		public String name;
 		
-		private Category(String name) {
+		private Category(String name)
+		{
 			this.name = name;
 		}
 	}
 	
-	public Hack(String name, String description, Category category, int key){
+	public Hack(String name, String description, Category category, int key)
+	{
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.key = key;
 	}
 	
-	public String getName(){
+	public String getName()
+	{
 		return name;
 	}
 	
-	public String getDescription(){
+	public String getDescription()
+	{
 		return description;
 	}
 	
-	public Category getCategory(){
+	public Category getCategory()
+	{
 		return category;
 	}
 	
-	public int getKey(){
+	public int getKey()
+	{
 		return key;
 	}
 	
-	public boolean isEnabled(){
+	public boolean isEnabled()
+	{
 		return enabled;
 	}
 	
-	public final void toggle(){
+	public final void toggle()
+	{
 		this.enabled = !this.enabled;
 		
-		if(enabled) {
+		if (enabled) {
 			onEnable();
 		} else {
 			onDisable();
 		}
 	}
 	
-	public void onUpdate(){
-		
+	public void onUpdate()
+	{
 	}
 	
-	protected void onEnable(){
+	protected void onEnable()
+	{
 	}
 	
-	protected void onDisable(){
+	protected void onDisable()
+	{
+	}
+	
+	protected final EventManager events()
+	{
+		return BloodicClient.INSTANCE.getEventManager();
 	}
 }

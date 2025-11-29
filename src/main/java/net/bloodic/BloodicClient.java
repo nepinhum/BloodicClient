@@ -1,28 +1,31 @@
 package net.bloodic;
 
-import net.minecraft.client.gui.DrawContext;
 import org.lwjgl.glfw.GLFW;
 
+import net.bloodic.event.EventManager;
 import net.bloodic.hack.Hack;
 import net.bloodic.hack.HackManager;
 import net.bloodic.hud.InGameHud;
+import net.bloodic.events.KeyPressListener;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
 
-public class BloodicClient implements ModInitializer{
-	
+public class BloodicClient implements ModInitializer
+{
 	private static boolean initialized;
 	private static boolean DEBUG = false;
 	
 	public static BloodicClient INSTANCE;
 	public static MinecraftClient MC;
+	
+	private EventManager eventManager;
 	private HackManager hackManager;
 	private InGameHud inGameHud;
 	
 	@Override
-	public void onInitialize(){
-		if(initialized)
+	public void onInitialize()
+	{
+		if (initialized)
 			throw new RuntimeException(
 				"BloodicClient.onInitialize() ran twice!");
 		initialized = true;
@@ -32,39 +35,41 @@ public class BloodicClient implements ModInitializer{
 		
 		INSTANCE = this;
 		MC = MinecraftClient.getInstance();
+		eventManager = new EventManager();
 		hackManager = new HackManager(this);
-		inGameHud = new InGameHud();
+		inGameHud = new InGameHud(eventManager);
+		registerInternalListeners();
 	}
 	
-	public HackManager getHackManager(){
+	public HackManager getHackManager()
+	{
 		return hackManager;
 	}
 	
-	public static boolean isDEBUG(){
+	public EventManager getEventManager()
+	{
+		return eventManager;
+	}
+	
+	public static boolean isDEBUG()
+	{
 		return DEBUG;
 	}
-
-	public void onRenderGUI(DrawContext context, float tickDelta) {
-		inGameHud.renderGUI(context, tickDelta);
-	}
 	
-	public void onKeyPress(int key, int action){
-		if(action == GLFW.GLFW_PRESS){
-			for(Hack hack : hackManager.getHacks()){
-				if(key == hack.getKey()) hack.toggle();
+	private void registerInternalListeners()
+	{
+		eventManager.add(KeyPressListener.class, event ->
+		{
+			if (event.getAction() != GLFW.GLFW_PRESS)
+				return;
+			
+			for (Hack hack : hackManager.getHacks()) {
+				if (event.getKeyCode() == hack.getKey())
+					hack.toggle();
 			}
-		}
-		
-		/*if(key == GLFW.GLFW_KEY_RIGHT_SHIFT) {
-			MC.setScreen(inGameHud.getClickGui());
-		}*/
-	}
-	
-	public void onUpdate(){
-		if(MC.player != null){
-			for(Hack hack : hackManager.getEnabledHacks()){
-				hack.onUpdate();
-			}
-		}
+			
+			/*if(event.getKeyCode() == GLFW.GLFW_KEY_RIGHT_SHIFT)
+				MC.setScreen(inGameHud.getClickGui());*/
+		});
 	}
 }

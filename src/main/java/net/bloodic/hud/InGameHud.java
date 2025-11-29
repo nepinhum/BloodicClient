@@ -1,15 +1,22 @@
 package net.bloodic.hud;
 
+import net.bloodic.event.EventManager;
+import net.bloodic.events.GUIRenderListener;
 import net.minecraft.client.gui.DrawContext;
 
-public class InGameHud {
+public class InGameHud implements GUIRenderListener
+{
 	private final HackListHud listHud;
-
-	public InGameHud() {
-		this.listHud = new HackListHud();
+	
+	public InGameHud(EventManager events)
+	{
+		listHud = new HackListHud();
+		events.add(GUIRenderListener.class, this);
 	}
-
-	public void renderGUI(DrawContext context, float tickDelta) {
-        listHud.render(context, tickDelta);
-    }
+	
+	@Override
+	public void onRenderGUI(DrawContext context, float tickDelta)
+	{
+		listHud.render(context, tickDelta);
+	}
 }
