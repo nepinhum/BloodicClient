@@ -1,5 +1,6 @@
 package net.bloodic.hacks;
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import org.lwjgl.glfw.GLFW;
 
 import net.bloodic.events.UpdateListener;
@@ -22,9 +23,9 @@ public class AutoSprint extends Hack implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		// well, for test
-		if (MC.player != null) {
-			MC.player.setSprinting(true);
+		ClientPlayerEntity player = MC.player;
+		if (player != null) {
+			player.setSprinting(true);
 		}
 	}
 	

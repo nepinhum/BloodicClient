@@ -5,6 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import net.bloodic.event.EventManager;
 import net.bloodic.hack.Hack;
 import net.bloodic.hack.HackManager;
+import net.bloodic.gui.ClickGuiScreen;
 import net.bloodic.hud.InGameHud;
 import net.bloodic.events.KeyPressListener;
 import net.fabricmc.api.ModInitializer;
@@ -63,13 +64,18 @@ public class BloodicClient implements ModInitializer
 			if (event.getAction() != GLFW.GLFW_PRESS)
 				return;
 			
+			if (event.getKeyCode() == GLFW.GLFW_KEY_RIGHT_SHIFT) {
+				if (MC.player == null)
+					return;
+				MC.setScreen(new ClickGuiScreen());
+				return;
+			}
+			
 			for (Hack hack : hackManager.getHacks()) {
 				if (event.getKeyCode() == hack.getKey())
 					hack.toggle();
 			}
 			
-			/*if(event.getKeyCode() == GLFW.GLFW_KEY_RIGHT_SHIFT)
-				MC.setScreen(inGameHud.getClickGui());*/
 		});
 	}
 }

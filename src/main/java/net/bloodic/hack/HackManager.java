@@ -7,6 +7,8 @@ import net.bloodic.BloodicClient;
 import net.bloodic.hack.Hack.Category;
 import net.bloodic.hacks.AutoSprint;
 import net.bloodic.hacks.Flight;
+import net.bloodic.hacks.Fullbright;
+import net.bloodic.hacks.Spider;
 
 public class HackManager
 {
@@ -49,5 +51,7 @@ public class HackManager
 	{
 		hacks.add(new Flight());
 		hacks.add(new AutoSprint());
+		hacks.add(new Fullbright());
+		hacks.add(new Spider());
 	}
 }

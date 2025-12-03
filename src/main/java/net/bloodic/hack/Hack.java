@@ -76,10 +76,6 @@ public class Hack
 		}
 	}
 	
-	public void onUpdate()
-	{
-	}
-	
 	protected void onEnable()
 	{
 	}

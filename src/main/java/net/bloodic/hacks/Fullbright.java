@@ -1,0 +1,47 @@
+package net.bloodic.hacks;
+
+import org.lwjgl.glfw.GLFW;
+
+import net.bloodic.events.UpdateListener;
+import net.bloodic.hack.Hack;
+import net.minecraft.client.option.SimpleOption;
+
+public class Fullbright extends Hack implements UpdateListener
+{
+	private double previousGamma;
+	private boolean savedGamma;
+	
+	public Fullbright()
+	{
+		super("Fullbright", "Maximizes game brightness.", Hack.Category.RENDER, GLFW.GLFW_KEY_B);
+	}
+	
+	@Override
+	protected void onEnable()
+	{
+		SimpleOption<Double> gamma = MC.options.getGamma();
+		previousGamma = gamma.getValue();
+		savedGamma = true;
+		
+		events().add(UpdateListener.class, this);
+	}
+	
+	@Override
+	public void onUpdate()
+	{
+		SimpleOption<Double> gamma = MC.options.getGamma();
+		if (gamma.getValue() < 16.0) {
+			gamma.setValue(16.0);
+		}
+	}
+	
+	@Override
+	protected void onDisable()
+	{
+		events().remove(UpdateListener.class, this);
+		
+		if (savedGamma) {
+			MC.options.getGamma().setValue(previousGamma);
+		}
+	}
+}
