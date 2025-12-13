@@ -12,5 +12,6 @@ Bloodic can be installed like any other ‘Fabric’ mod:
 ## Todo List
 - [x] ClickGui
 - [ ] Settings for hack
+- [ ] Multi-language support
 
 If you have a problem you can open a [#issue!](https://github.com/nxpinhum5326/BloodicClient/issues)

@@ -8,8 +8,12 @@ import net.bloodic.hack.HackManager;
 import net.bloodic.gui.ClickGuiScreen;
 import net.bloodic.hud.InGameHud;
 import net.bloodic.events.KeyPressListener;
+import net.bloodic.events.UpdateListener;
+import net.bloodic.update.BloodicUpdater;
+import net.bloodic.update.Version;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
 public class BloodicClient implements ModInitializer
 {
@@ -22,6 +26,8 @@ public class BloodicClient implements ModInitializer
 	private EventManager eventManager;
 	private HackManager hackManager;
 	private InGameHud inGameHud;
+	private Version version;
+	private BloodicUpdater updater;
 	
 	@Override
 	public void onInitialize()
@@ -36,9 +42,12 @@ public class BloodicClient implements ModInitializer
 		
 		INSTANCE = this;
 		MC = MinecraftClient.getInstance();
+		version = Version.current();
 		eventManager = new EventManager();
 		hackManager = new HackManager(this);
 		inGameHud = new InGameHud(eventManager);
+		updater = new BloodicUpdater(version);
+		updater.checkForUpdatesAsync();
 		registerInternalListeners();
 	}
 	
@@ -50,6 +59,16 @@ public class BloodicClient implements ModInitializer
 	public EventManager getEventManager()
 	{
 		return eventManager;
+	}
+	
+	public Version getVersion()
+	{
+		return version;
+	}
+	
+	public BloodicUpdater getUpdater()
+	{
+		return updater;
 	}
 	
 	public static boolean isDEBUG()
@@ -76,6 +95,43 @@ public class BloodicClient implements ModInitializer
 					hack.toggle();
 			}
 			
+		});
+		
+		eventManager.add(UpdateListener.class, new UpdateListener()
+		{
+			private boolean announced;
+			
+			@Override
+			public void onUpdate()
+			{
+				if (announced || updater == null)
+					return;
+				
+				if (updater.getStatus() == BloodicUpdater.Status.FAILED) {
+					announced = true;
+					System.out.println("Bloodic update check failed: "
+						+ updater.getLastError());
+					return;
+				}
+				
+				if (updater.getStatus() != BloodicUpdater.Status.READY)
+					return;
+				
+				if (!updater.isUpdateAvailable()) {
+					announced = true;
+					return;
+				}
+				
+				if (MC.player == null)
+					return;
+				
+				announced = true;
+				MC.player.sendMessage(Text.literal("Update available: "
+					+ updater.getLatestVersion() + " (you have " + version + ")"),
+					false);
+				MC.player.sendMessage(Text.literal("Download: "
+					+ updater.getDownloadPage()), false);
+			}
 		});
 	}
 }

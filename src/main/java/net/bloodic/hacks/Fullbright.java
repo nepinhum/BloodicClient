@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
+import net.bloodic.mixinterface.ISimpleOption;
 import net.minecraft.client.option.SimpleOption;
 
 public class Fullbright extends Hack implements UpdateListener
@@ -31,7 +32,8 @@ public class Fullbright extends Hack implements UpdateListener
 	{
 		SimpleOption<Double> gamma = MC.options.getGamma();
 		if (gamma.getValue() < 16.0) {
-			gamma.setValue(16.0);
+			ISimpleOption<Double> opt = ISimpleOption.get(MC.options.getGamma());
+			opt.forceSetValue(16.0);
 		}
 	}
 	

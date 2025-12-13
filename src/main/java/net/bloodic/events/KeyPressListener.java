@@ -1,7 +1,5 @@
 package net.bloodic.events;
 
-import java.util.ArrayList;
-
 import net.bloodic.event.Event;
 import net.bloodic.event.Listener;
 
@@ -26,16 +24,15 @@ public interface KeyPressListener extends Listener
 		}
 		
 		@Override
-		public void fire(ArrayList<KeyPressListener> listeners)
-		{
-			for (KeyPressListener listener : listeners)
-				listener.onKeyPress(this);
-		}
-		
-		@Override
 		public Class<KeyPressListener> getListenerType()
 		{
 			return KeyPressListener.class;
+		}
+
+		@Override
+		public void fire(KeyPressListener listener)
+		{
+			listener.onKeyPress(this);
 		}
 		
 		public int getKeyCode()
