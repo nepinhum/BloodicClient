@@ -5,13 +5,16 @@ import org.lwjgl.glfw.GLFW;
 
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
+import net.bloodic.settings.BooleanSetting;
 
 public class AutoSprint extends Hack implements UpdateListener
 {
+	private final BooleanSetting forwardOnly;
 	
 	public AutoSprint()
 	{
 		super("AutoSprint", "Keeps your sprint.", Hack.Category.MOVEMENT, GLFW.GLFW_KEY_V); // V
+		forwardOnly = addSetting(new BooleanSetting("Forward Only", "Sprint only while moving forward.", true));
 	}
 	
 	@Override
@@ -25,7 +28,9 @@ public class AutoSprint extends Hack implements UpdateListener
 	{
 		ClientPlayerEntity player = MC.player;
 		if (player != null) {
-			player.setSprinting(true);
+			if (!forwardOnly.getValue() || MC.options.forwardKey.isPressed()) {
+				player.setSprinting(true);
+			}
 		}
 	}
 	

@@ -11,6 +11,7 @@ import net.bloodic.events.KeyPressListener;
 import net.bloodic.events.UpdateListener;
 import net.bloodic.update.BloodicUpdater;
 import net.bloodic.update.Version;
+import net.bloodic.config.ConfigManager;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
@@ -28,6 +29,7 @@ public class BloodicClient implements ModInitializer
 	private InGameHud inGameHud;
 	private Version version;
 	private BloodicUpdater updater;
+	private ConfigManager configManager;
 	
 	@Override
 	public void onInitialize()
@@ -45,8 +47,10 @@ public class BloodicClient implements ModInitializer
 		version = Version.current();
 		eventManager = new EventManager();
 		hackManager = new HackManager(this);
+		configManager = new ConfigManager(hackManager);
 		inGameHud = new InGameHud(eventManager);
 		updater = new BloodicUpdater(version);
+		configManager.load();
 		updater.checkForUpdatesAsync();
 		registerInternalListeners();
 	}
@@ -70,6 +74,11 @@ public class BloodicClient implements ModInitializer
 	{
 		return updater;
 	}
+
+	public ConfigManager getConfigManager()
+	{
+		return configManager;
+	}
 	
 	public static boolean isDEBUG()
 	{
@@ -78,24 +87,23 @@ public class BloodicClient implements ModInitializer
 	
 	private void registerInternalListeners()
 	{
-		eventManager.add(KeyPressListener.class, event ->
-		{
-			if (event.getAction() != GLFW.GLFW_PRESS)
-				return;
-			
+			eventManager.add(KeyPressListener.class, event ->
+			{
+				if (event.getAction() != GLFW.GLFW_PRESS)
+					return;
+				
 			if (event.getKeyCode() == GLFW.GLFW_KEY_RIGHT_SHIFT) {
 				if (MC.player == null)
 					return;
 				MC.setScreen(new ClickGuiScreen());
 				return;
 			}
-			
-			for (Hack hack : hackManager.getHacks()) {
-				if (event.getKeyCode() == hack.getKey())
-					hack.toggle();
-			}
-			
-		});
+				
+				for (Hack hack : hackManager.getHacks()) {
+					if (event.getKeyCode() == hack.getKey())
+						hack.toggle();
+				}
+			});
 		
 		eventManager.add(UpdateListener.class, new UpdateListener()
 		{

@@ -46,6 +46,16 @@ public class HackManager
 		
 		return categoryHacks;
 	}
+
+	public Hack getHackByName(String name)
+	{
+		for (Hack hack : hacks) {
+			if (hack.getName().equalsIgnoreCase(name))
+				return hack;
+		}
+
+		return null;
+	}
 	
 	private void addHacks()
 	{

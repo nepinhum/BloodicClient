@@ -5,16 +5,19 @@ import org.lwjgl.glfw.GLFW;
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
 import net.bloodic.mixinterface.ISimpleOption;
+import net.bloodic.settings.NumberSetting;
 import net.minecraft.client.option.SimpleOption;
 
 public class Fullbright extends Hack implements UpdateListener
 {
 	private double previousGamma;
 	private boolean savedGamma;
+	private final NumberSetting brightness;
 	
 	public Fullbright()
 	{
 		super("Fullbright", "Maximizes game brightness.", Hack.Category.RENDER, GLFW.GLFW_KEY_B);
+		brightness = addSetting(new NumberSetting("Brightness", "Gamma override value.", 16.0, 1.0, 20.0, 0.5));
 	}
 	
 	@Override
@@ -31,9 +34,10 @@ public class Fullbright extends Hack implements UpdateListener
 	public void onUpdate()
 	{
 		SimpleOption<Double> gamma = MC.options.getGamma();
-		if (gamma.getValue() < 16.0) {
+		double target = brightness.getValue();
+		if (gamma.getValue() < target) {
 			ISimpleOption<Double> opt = ISimpleOption.get(MC.options.getGamma());
-			opt.forceSetValue(16.0);
+			opt.forceSetValue(target);
 		}
 	}
 	
