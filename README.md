@@ -1,17 +1,20 @@
 # BloodicClient
 Experimental level (for now) Minecraft hacked client.
-
-- Download from https://github.com/nxpinhum5326/BloodicClient/releases
-- 
+> Download from [here](https://github.com/nepinhum/BloodicClient/releases)
 
 ## Installation
 Bloodic can be installed like any other ‘Fabric’ mod:
 1. Download and run the Fabric installer.
 2. Add the Bloodic Client and Fabric API to your mods folder.
 
+## Features
+* Easy installation.
+* Hack & client configuration.
+* Many commonly known features. **More will be added.**
+
 ## Todo List
 - [x] ClickGui
-- [ ] Settings for hack
+- [x] Settings for hack
 - [ ] Multi-language support
 
-If you have a problem you can open a [#issue!](https://github.com/nxpinhum5326/BloodicClient/issues)
+If you have a problem you can open a [#issue!](https://github.com/nepinhum/BloodicClient/issues)
