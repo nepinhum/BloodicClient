@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import net.bloodic.BloodicClient;
+import net.minecraft.client.gui.screen.ChatScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +20,7 @@ public final class EventManager
 	
 	public EventManager()
 	{
+
 	}
 	
 	public static <L extends Listener, E extends Event<L>> void fire(E event)
@@ -26,11 +28,13 @@ public final class EventManager
 		BloodicClient client = BloodicClient.INSTANCE;
 		if (client == null)
 			return;
-		
+		if (BloodicClient.MC.currentScreen instanceof ChatScreen)
+			return;
+
 		EventManager eventManager = client.getEventManager();
 		if (eventManager == null)
 			return;
-		
+
 		eventManager.fireImpl(event);
 	}
 	

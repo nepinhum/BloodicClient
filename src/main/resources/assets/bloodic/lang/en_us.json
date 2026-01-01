@@ -1,0 +1,15 @@
+{
+  "test": "hello",
+  "gui.buttons.save": "Save",
+  "gui.buttons.reset": "Reset",
+  "gui.texts.key": "Key: %s",
+
+  "hacks.descs.autosprint": "Keeps your sprint.",
+  "hacks.descs.flight": "Allows to fly.",
+  "hacks.descs.fullbright": "Increases game brightness.",
+  "hacks.descs.panic": "",
+  "hacks.descs.spider": "Makes you Peter Parker.",
+  "hacks.descs.twerk": "Makes you twerk.",
+  "hacks.descs.jesus": "Oh my...",
+  "hacks.descs.creativeflight": "Allows to fly."
+}

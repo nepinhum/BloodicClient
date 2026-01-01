@@ -3,11 +3,11 @@ package net.bloodic.events;
 import net.bloodic.event.Event;
 import net.bloodic.event.Listener;
 
-	public interface UpdateListener extends Listener
-	{
-		void onUpdate();
+public interface UpdateListener extends Listener
+{
+	void onUpdate();
 		
-		final class UpdateEvent extends Event<UpdateListener>
+	final class UpdateEvent extends Event<UpdateListener>
 	{
 		public static final UpdateEvent INSTANCE = new UpdateEvent();
 		

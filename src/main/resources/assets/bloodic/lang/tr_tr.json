@@ -1,0 +1,15 @@
+{
+  "test": "hello",
+  "gui.buttons.save": "Kaydet",
+  "gui.buttons.reset": "Sıfırla",
+  "gui.texts.key": "Key: %s",
+
+  "hacks.descs.autosprint": "Sürekli koşmanı sağlar.",
+  "hacks.descs.flight": "Uçmanı sağlar.",
+  "hacks.descs.fullbright": "Oyunun parlaklığını artırır.",
+  "hacks.descs.panic": "",
+  "hacks.descs.spider": "Peter Parker olmak ister misin?",
+  "hacks.descs.twerk": "Alizade olmak için bir adım!",
+  "hacks.descs.jesus": "Gökler aşkına...",
+  "hacks.descs.creativeflight": "Uçmanı sağlar."
+}

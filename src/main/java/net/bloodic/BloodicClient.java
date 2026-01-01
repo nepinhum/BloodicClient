@@ -1,5 +1,7 @@
 package net.bloodic;
 
+import com.mojang.brigadier.Message;
+import net.minecraft.text.TranslatableTextContent;
 import org.lwjgl.glfw.GLFW;
 
 import net.bloodic.event.EventManager;
@@ -54,7 +56,7 @@ public class BloodicClient implements ModInitializer
 		updater.checkForUpdatesAsync();
 		registerInternalListeners();
 	}
-	
+
 	public HackManager getHackManager()
 	{
 		return hackManager;

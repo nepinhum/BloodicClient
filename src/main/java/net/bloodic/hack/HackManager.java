@@ -5,10 +5,7 @@ import java.util.List;
 
 import net.bloodic.BloodicClient;
 import net.bloodic.hack.Hack.Category;
-import net.bloodic.hacks.AutoSprint;
-import net.bloodic.hacks.Flight;
-import net.bloodic.hacks.Fullbright;
-import net.bloodic.hacks.Spider;
+import net.bloodic.hacks.*;
 
 public class HackManager
 {
@@ -63,5 +60,9 @@ public class HackManager
 		hacks.add(new AutoSprint());
 		hacks.add(new Fullbright());
 		hacks.add(new Spider());
+		hacks.add(new Twerk());
+		hacks.add(new Jesus());
+		hacks.add(new Panic());
+		hacks.add(new CreativeFlight());
 	}
 }

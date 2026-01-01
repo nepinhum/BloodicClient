@@ -16,7 +16,7 @@ public class Fullbright extends Hack implements UpdateListener
 	
 	public Fullbright()
 	{
-		super("Fullbright", "Maximizes game brightness.", Hack.Category.RENDER, GLFW.GLFW_KEY_B);
+		super("Fullbright", "hacks.descs.fullbright", Category.RENDER, GLFW.GLFW_KEY_B);
 		brightness = addSetting(new NumberSetting("Brightness", "Gamma override value.", 16.0, 1.0, 20.0, 0.5));
 	}
 	

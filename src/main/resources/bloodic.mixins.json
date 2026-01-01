@@ -9,7 +9,8 @@
     "KeyboardMixin",
 	"ClientMixin",
 	"InGameHudMixin",
-	"SimpleOptionMixin"
+	"SimpleOptionMixin",
+    "ClientCommonNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

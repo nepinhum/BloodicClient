@@ -13,7 +13,7 @@ public class AutoSprint extends Hack implements UpdateListener
 	
 	public AutoSprint()
 	{
-		super("AutoSprint", "Keeps your sprint.", Hack.Category.MOVEMENT, GLFW.GLFW_KEY_V); // V
+		super("AutoSprint", "hacks.descs.autosprint", Category.MOVEMENT, GLFW.GLFW_KEY_V); // V
 		forwardOnly = addSetting(new BooleanSetting("Forward Only", "Sprint only while moving forward.", true));
 	}
 	

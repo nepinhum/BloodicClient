@@ -14,7 +14,7 @@ public class Spider extends Hack implements UpdateListener
 
     public Spider()
     {
-        super("Spider", "Makes you Peter Parker.", Hack.Category.MOVEMENT, GLFW.GLFW_KEY_J);
+        super("Spider", "hacks.descs.spider", Category.MOVEMENT, GLFW.GLFW_KEY_N);
         climbVelocity = addSetting(new NumberSetting("Climb Velocity", "Upward push when on a wall.", 0.20, 0.10, 0.60, 0.05));
     }
 

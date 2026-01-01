@@ -8,6 +8,7 @@ import net.bloodic.BloodicClient;
 import net.minecraft.client.MinecraftClient;
 import net.bloodic.event.EventManager;
 import net.bloodic.settings.Setting;
+import net.minecraft.text.Text;
 
 public class Hack
 {
@@ -28,7 +29,9 @@ public class Hack
 		MOVEMENT("Movement"),
 		WORLD("World"),
 		RENDER("Render"),
-		EXPLOIT("Exploit");
+		EXPLOIT("Exploit"),
+		FUN("Fun"),
+		OTHER("Other");
 		
 		public String name;
 		
