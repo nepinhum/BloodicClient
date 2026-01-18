@@ -8,7 +8,10 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,10 +32,18 @@ public final class ConfigManager
 {
 	private static final Logger LOGGER = LogManager.getLogger("Bloodic/Config");
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+	private static final long SAVE_DEBOUNCE_MS = 300;
 
 	private final HackManager hackManager;
 	private final Path configFile;
 	private volatile boolean suppressSave;
+	private final ScheduledExecutorService saveExecutor =
+		Executors.newSingleThreadScheduledExecutor(r -> {
+			Thread t = new Thread(r, "bloodic-config-save");
+			t.setDaemon(true);
+			return t;
+		});
+	private ScheduledFuture<?> pendingSave;
 
 	public ConfigManager(HackManager hackManager)
 	{
@@ -108,9 +119,11 @@ public final class ConfigManager
 
 			root.add("hacks", hacksObj);
 
-			try (Writer writer = Files.newBufferedWriter(configFile)) {
+			Path tempFile = configFile.resolveSibling(configFile.getFileName() + ".tmp");
+			try (Writer writer = Files.newBufferedWriter(tempFile)) {
 				GSON.toJson(root, writer);
 			}
+			atomicMove(tempFile, configFile);
 		} catch (IOException e) {
 			LOGGER.error("Failed to save config", e);
 		}
@@ -121,11 +134,16 @@ public final class ConfigManager
 		if (suppressSave)
 			return;
 
-		CompletableFuture.runAsync(this::save)
-			.exceptionally(throwable -> {
-				LOGGER.error("Async config save failed", throwable);
-				return null;
-			});
+		if (pendingSave != null)
+			pendingSave.cancel(false);
+
+		pendingSave = saveExecutor.schedule(() -> {
+			try {
+				save();
+			} catch (Exception e) {
+				LOGGER.error("Async config save failed", e);
+			}
+		}, SAVE_DEBOUNCE_MS, TimeUnit.MILLISECONDS);
 	}
 
 	public void reset()
@@ -153,6 +171,17 @@ public final class ConfigManager
 	public boolean isSaveSuppressed()
 	{
 		return suppressSave;
+	}
+
+	private void atomicMove(Path source, Path target) throws IOException
+	{
+		try {
+			Files.move(source, target,
+				java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+				java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+		} catch (IOException e) {
+			Files.move(source, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+		}
 	}
 
 	private void applySettings(Hack hack, JsonObject settingsObj)

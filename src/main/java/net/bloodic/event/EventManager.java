@@ -28,9 +28,6 @@ public final class EventManager
 		BloodicClient client = BloodicClient.INSTANCE;
 		if (client == null)
 			return;
-		if (BloodicClient.MC.currentScreen instanceof ChatScreen)
-			return;
-
 		EventManager eventManager = client.getEventManager();
 		if (eventManager == null)
 			return;
