@@ -1,7 +1,5 @@
 package net.bloodic.hacks;
 
-import org.lwjgl.glfw.GLFW;
-
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
@@ -14,7 +12,7 @@ public class Spider extends Hack implements UpdateListener
 
     public Spider()
     {
-        super("Spider", "hacks.descs.spider", Category.MOVEMENT, GLFW.GLFW_KEY_N);
+        super("Spider", "hacks.descs.spider", Category.MOVEMENT);
         climbVelocity = addSetting(new NumberSetting("Climb Velocity", "Upward push when on a wall.", 0.20, 0.10, 0.60, 0.05));
     }
 

@@ -1,7 +1,5 @@
 package net.bloodic.hacks;
 
-import org.lwjgl.glfw.GLFW;
-
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
 import net.bloodic.settings.BooleanSetting;
@@ -17,7 +15,7 @@ public class Flight extends Hack implements UpdateListener
 
 	public Flight()
 	{
-		super("Flight", "hacks.descs.flight", Category.MOVEMENT, GLFW.GLFW_KEY_F);
+		super("Flight", "hacks.descs.flight", Category.MOVEMENT);
 		antiKick = addSetting(new BooleanSetting("AntiKick", "Small downward pulses while hovering.", true));
 		noFall = addSetting(new BooleanSetting("NoFall", "Reset fall distance while flying.", true));
 	}

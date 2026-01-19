@@ -7,7 +7,6 @@ import net.bloodic.utils.AntiKick;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.player.PlayerAbilities;
-import org.lwjgl.glfw.GLFW;
 
 public class CreativeFlight extends Hack implements UpdateListener
 {
@@ -17,7 +16,7 @@ public class CreativeFlight extends Hack implements UpdateListener
 
     public CreativeFlight()
     {
-        super("CreativeFlight", "hacks.descs.creativeflight", Category.MOVEMENT, GLFW.GLFW_KEY_O);
+        super("CreativeFlight", "hacks.descs.creativeflight", Category.MOVEMENT);
         antiKick = addSetting(new BooleanSetting("AntiKick", "Small downward pulses while hovering.", false));
         noFall = addSetting(new BooleanSetting("NoFall", "Reset fall distance while flying.", true));
     }

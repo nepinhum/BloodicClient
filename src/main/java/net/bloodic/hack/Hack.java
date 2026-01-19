@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.bloodic.BloodicClient;
+import net.bloodic.keybinds.Keybind;
 import net.minecraft.client.MinecraftClient;
 import net.bloodic.event.EventManager;
 import net.bloodic.settings.Setting;
@@ -18,7 +19,7 @@ public class Hack
 	private final String name;
 	private final String description;
 	private final Category category;
-	private final int key;
+	private int key;
 	
 	private boolean enabled;
 	private final ArrayList<Setting<?>> settings = new ArrayList<>();
@@ -41,12 +42,12 @@ public class Hack
 		}
 	}
 	
-	public Hack(String name, String description, Category category, int key)
+	public Hack(String name, String description, Category category)
 	{
 		this.name = name;
 		this.description = description;
 		this.category = category;
-		this.key = key;
+		this.key = Keybind.findPossibleKeybind(this);
 	}
 	
 	public String getName()
@@ -67,6 +68,19 @@ public class Hack
 	public int getKey()
 	{
 		return key;
+	}
+
+	public void setKey(int key)
+	{
+		if (this.key == key)
+			return;
+
+		this.key = key;
+
+		if (CL != null && CL.getConfigManager() != null
+			&& !CL.getConfigManager().isSaveSuppressed()) {
+			CL.getConfigManager().saveAsync();
+		}
 	}
 	
 	public boolean isEnabled()

@@ -76,6 +76,10 @@ public final class ConfigManager
 						boolean enabled = hackObj.get("enabled").getAsBoolean();
 						hack.setEnabled(enabled);
 					}
+					if (hackObj.has("key")) {
+						int key = hackObj.get("key").getAsInt();
+						hack.setKey(key);
+					}
 
 					JsonObject settingsObj = hackObj.getAsJsonObject("settings");
 					if (settingsObj == null)
@@ -99,6 +103,7 @@ public final class ConfigManager
 			for (Hack hack : hackManager.getHacks()) {
 				JsonObject hackObj = new JsonObject();
 				hackObj.addProperty("enabled", hack.isEnabled());
+				hackObj.addProperty("key", hack.getKey());
 
 				JsonObject settingsObj = new JsonObject();
 				for (Setting<?> setting : hack.getSettings()) {

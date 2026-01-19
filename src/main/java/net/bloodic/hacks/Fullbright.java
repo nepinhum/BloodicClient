@@ -1,7 +1,5 @@
 package net.bloodic.hacks;
 
-import org.lwjgl.glfw.GLFW;
-
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
 import net.bloodic.mixinterface.ISimpleOption;
@@ -16,7 +14,7 @@ public class Fullbright extends Hack implements UpdateListener
 	
 	public Fullbright()
 	{
-		super("Fullbright", "hacks.descs.fullbright", Category.RENDER, GLFW.GLFW_KEY_B);
+		super("Fullbright", "hacks.descs.fullbright", Category.RENDER);
 		brightness = addSetting(new NumberSetting("Brightness", "Gamma override value.", 16.0, 1.0, 20.0, 0.5));
 	}
 	

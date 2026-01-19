@@ -3,6 +3,12 @@
   "gui.buttons.save": "Kaydet",
   "gui.buttons.reset": "Sıfırla",
   "gui.texts.key": "Key: %s",
+  "gui.texts.bind_key": "Bir tuşa bas...",
+  "gui.buttons.keybinds": "Kontroller",
+  "gui.buttons.reset_all": "Hepsini sıfırla",
+  "gui.buttons.done": "Geri",
+  "gui.keybinds.title": "Kontroller",
+  "gui.keybinds.search": "Ara...",
 
   "hacks.descs.autosprint": "Sürekli koşmanı sağlar.",
   "hacks.descs.flight": "Uçmanı sağlar.",
