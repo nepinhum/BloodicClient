@@ -48,16 +48,16 @@ public class BloodicClient implements ModInitializer
 		INSTANCE = this;
 		MC = MinecraftClient.getInstance();
 		version = Version.current();
-			eventManager = new EventManager();
-			hackManager = new HackManager(this);
-			configManager = new ConfigManager(hackManager);
-			commandRegistry = new CommandRegistry();
-			commandRegistry.init();
-			inGameHud = new InGameHud(eventManager);
-			updater = new BloodicUpdater(version);
-			configManager.load();
-			updater.checkForUpdatesAsync();
-			registerInternalListeners();
+		eventManager = new EventManager();
+		hackManager = new HackManager(this);
+		configManager = new ConfigManager(hackManager);
+		commandRegistry = new CommandRegistry();
+		commandRegistry.init();
+		inGameHud = new InGameHud(eventManager);
+		updater = new BloodicUpdater(version);
+		configManager.load();
+		updater.checkForUpdatesAsync();
+		registerInternalListeners();
 	}
 
 	public HackManager getHackManager()
