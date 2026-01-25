@@ -56,15 +56,19 @@ public class ClickGuiScreen extends Screen
 		int buttonY = 6;
 		int buttonWidth = 64;
 		int spacing = 4;
-		int startX = this.width - (buttonWidth * 2 + spacing + LEFT_MARGIN);
+		int startX = this.width - (buttonWidth * 3 + spacing * 2 + LEFT_MARGIN);
 
 		addDrawableChild(ButtonWidget.builder(Text.translatable("gui.buttons.save"), b -> {
 			client.getConfigManager().saveAsync();
 		}).dimensions(startX, buttonY, buttonWidth, 18).build());
 
+		addDrawableChild(ButtonWidget.builder(Text.translatable("gui.buttons.keybinds"), b -> {
+			BloodicClient.MC.setScreen(new KeybindScreen(this));
+		}).dimensions(startX + (buttonWidth + spacing), buttonY, buttonWidth, 18).build());
+
 		addDrawableChild(ButtonWidget.builder(Text.translatable("gui.buttons.reset"), b -> {
 			client.getConfigManager().reset();
-		}).dimensions(startX + (buttonWidth + spacing), buttonY, buttonWidth, 18).build());
+		}).dimensions(startX + (buttonWidth + spacing) * 2, buttonY, buttonWidth, 18).build());
 	}
 
 	@Override
@@ -210,10 +214,7 @@ public class ClickGuiScreen extends Screen
 		int nameColor = hack.isEnabled() ? 0x55FF55 : 0xFFFFFF;
 		context.drawTextWithShadow(textRenderer, hack.getName(), x + 5, y + 3, nameColor);
 
-		Text keyInfo = Text.translatable(
-				"gui.texts.key",
-				getKeyName(hack.getKey())
-		);
+		Text keyInfo = Text.translatable("gui.texts.key", getKeyName(hack.getKey()));
 		context.drawTextWithShadow(textRenderer, keyInfo, x + 115, y + 3, 0xAAAAAA);
 
 		String descriptionKey = hack.getDescription();

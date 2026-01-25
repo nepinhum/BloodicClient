@@ -65,16 +65,22 @@ public final class ConfigManager
 				return;
 
 			withSuppressedSave(() -> {
-				for (Map.Entry<String, JsonElement> entry : hacksJson.entrySet()) {
-					String hackName = entry.getKey();
-					Hack hack = hackManager.getHackByName(hackName);
-					if (hack == null)
-						continue;
+			for (Map.Entry<String, JsonElement> entry : hacksJson.entrySet()) {
+				String hackName = entry.getKey();
+				Hack hack = hackManager.getHackByName(hackName);
+				if (hack == null)
+					continue;
+				if (hack instanceof DontSaveState)
+					continue;
 
-					JsonObject hackObj = entry.getValue().getAsJsonObject();
-					if (hackObj.has("enabled")) {
-						boolean enabled = hackObj.get("enabled").getAsBoolean();
-						hack.setEnabled(enabled);
+				JsonObject hackObj = entry.getValue().getAsJsonObject();
+				if (hackObj.has("enabled")) {
+					boolean enabled = hackObj.get("enabled").getAsBoolean();
+					hack.setEnabled(enabled);
+					}
+					if (hackObj.has("key")) {
+						int key = hackObj.get("key").getAsInt();
+						hack.setKey(key);
 					}
 
 					JsonObject settingsObj = hackObj.getAsJsonObject("settings");
@@ -97,11 +103,18 @@ public final class ConfigManager
 			JsonObject hacksObj = new JsonObject();
 
 			for (Hack hack : hackManager.getHacks()) {
+				if (hack instanceof DontSaveState)
+					continue;
+
 				JsonObject hackObj = new JsonObject();
 				hackObj.addProperty("enabled", hack.isEnabled());
+				hackObj.addProperty("key", hack.getKey());
 
 				JsonObject settingsObj = new JsonObject();
 				for (Setting<?> setting : hack.getSettings()) {
+					if (setting instanceof DontSaveState)
+						continue;
+
 					Object val = setting.getValue();
 					if (val instanceof Enum<?> e) {
 						settingsObj.addProperty(setting.getName(), e.name());
@@ -190,6 +203,8 @@ public final class ConfigManager
 		for (Map.Entry<String, JsonElement> entry : settingsObj.entrySet()) {
 			Setting<?> setting = settingMap.get(entry.getKey());
 			if (setting == null)
+				continue;
+			if (setting instanceof DontSaveState)
 				continue;
 
 			JsonElement value = entry.getValue();

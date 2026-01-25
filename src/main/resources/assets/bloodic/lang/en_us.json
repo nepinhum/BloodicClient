@@ -3,6 +3,12 @@
   "gui.buttons.save": "Save",
   "gui.buttons.reset": "Reset",
   "gui.texts.key": "Key: %s",
+  "gui.texts.bind_key": "Press a key...",
+  "gui.buttons.keybinds": "Keybinds",
+  "gui.buttons.reset_all": "Reset All",
+  "gui.buttons.done": "Done",
+  "gui.keybinds.title": "Keybinds",
+  "gui.keybinds.search": "Search...",
 
   "hacks.descs.autosprint": "Keeps your sprint.",
   "hacks.descs.flight": "Allows to fly.",
@@ -11,5 +17,6 @@
   "hacks.descs.spider": "Makes you Peter Parker.",
   "hacks.descs.twerk": "Makes you twerk.",
   "hacks.descs.jesus": "Oh my...",
+  "hacks.descs.jetpack": "Boosts you upward.",
   "hacks.descs.creativeflight": "Allows to fly."
 }

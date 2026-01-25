@@ -5,7 +5,6 @@ import net.bloodic.hack.Hack;
 import net.bloodic.settings.NumberSetting;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
-import org.lwjgl.glfw.GLFW;
 
 public class Twerk extends Hack implements UpdateListener
 {
@@ -15,7 +14,7 @@ public class Twerk extends Hack implements UpdateListener
 
     public Twerk()
     {
-        super("Twerk", "hacks.descs.twerk", Category.FUN, GLFW.GLFW_KEY_K);
+        super("Twerk", "hacks.descs.twerk", Category.FUN);
         twerkSpeed = addSetting(new NumberSetting("Twerk speed", "You know!", 5.0, 5.0, 10.0, 1));
     }
 

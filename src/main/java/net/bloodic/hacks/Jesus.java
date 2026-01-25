@@ -10,7 +10,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import org.lwjgl.glfw.GLFW;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -22,7 +21,7 @@ public class Jesus extends Hack implements UpdateListener, PacketOutputListener
 
     public Jesus()
     {
-        super("Jesus", "hacks.descs.jesus", Category.MOVEMENT, GLFW.GLFW_KEY_J);
+        super("Jesus", "hacks.descs.jesus", Category.MOVEMENT);
 
     }
 

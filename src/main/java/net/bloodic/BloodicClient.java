@@ -12,6 +12,8 @@ import net.bloodic.events.UpdateListener;
 import net.bloodic.update.BloodicUpdater;
 import net.bloodic.update.Version;
 import net.bloodic.config.ConfigManager;
+import net.bloodic.command.CmdProcessor;
+import net.bloodic.registry.impl.CommandRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
@@ -30,6 +32,7 @@ public class BloodicClient implements ModInitializer
 	private Version version;
 	private BloodicUpdater updater;
 	private ConfigManager configManager;
+	private CommandRegistry commandRegistry;
 	
 	@Override
 	public void onInitialize()
@@ -48,6 +51,8 @@ public class BloodicClient implements ModInitializer
 		eventManager = new EventManager();
 		hackManager = new HackManager(this);
 		configManager = new ConfigManager(hackManager);
+		commandRegistry = new CommandRegistry();
+		commandRegistry.init();
 		inGameHud = new InGameHud(eventManager);
 		updater = new BloodicUpdater(version);
 		configManager.load();
@@ -79,6 +84,11 @@ public class BloodicClient implements ModInitializer
 	{
 		return configManager;
 	}
+
+	public CommandRegistry getCommandRegistry()
+	{
+		return commandRegistry;
+	}
 	
 	public static boolean isDEBUG()
 	{
@@ -87,8 +97,10 @@ public class BloodicClient implements ModInitializer
 	
 	private void registerInternalListeners()
 	{
-			eventManager.add(KeyPressListener.class, event ->
-			{
+		eventManager.add(net.bloodic.events.ChatOutputListener.class, new CmdProcessor(commandRegistry));
+
+		eventManager.add(KeyPressListener.class, event ->
+		{
 				if (event.getAction() != GLFW.GLFW_PRESS)
 					return;
 				

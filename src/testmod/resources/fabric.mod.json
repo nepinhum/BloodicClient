@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bloodic-testmod",
+  "version": "1.0.0",
+  "name": "Bloodic Testmod",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "net.bloodic.test.BloodicGameTests"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "fabric-gametest-api-v1": "*"
+  }
+}
