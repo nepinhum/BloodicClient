@@ -1,9 +1,10 @@
 package net.bloodic.hacks;
 
+import net.bloodic.config.DontSaveState;
 import net.bloodic.events.UpdateListener;
 import net.bloodic.hack.Hack;
 
-public class Panic extends Hack implements UpdateListener
+public class Panic extends Hack implements UpdateListener, DontSaveState
 {
     public Panic()
     {

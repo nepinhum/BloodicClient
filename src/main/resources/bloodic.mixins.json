@@ -6,6 +6,8 @@
   "mixins": [
   ],
   "client": [
+    "ChatInputSuggestorMixin",
+    "ChatScreenMixin",
     "KeyboardMixin",
 	"ClientMixin",
 	"InGameHudMixin",

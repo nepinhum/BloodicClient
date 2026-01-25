@@ -57,6 +57,7 @@ public class HackManager
 	private void addHacks()
 	{
 		hacks.add(new Flight());
+		hacks.add(new Jetpack());
 		hacks.add(new AutoSprint());
 		hacks.add(new Fullbright());
 		hacks.add(new Spider());

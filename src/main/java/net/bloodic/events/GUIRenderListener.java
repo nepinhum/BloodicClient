@@ -4,11 +4,11 @@ import net.bloodic.event.Event;
 import net.bloodic.event.Listener;
 import net.minecraft.client.gui.DrawContext;
 
-	public interface GUIRenderListener extends Listener
-	{
-		void onRenderGUI(DrawContext context, float tickDelta);
+public interface GUIRenderListener extends Listener
+{
+	void onRenderGUI(DrawContext context, float tickDelta);
 		
-		final class GUIRenderEvent extends Event<GUIRenderListener>
+	final class GUIRenderEvent extends Event<GUIRenderListener>
 	{
 		private final DrawContext context;
 		private final float tickDelta;
