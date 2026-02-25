@@ -3,7 +3,7 @@ An experimental level Minecraft hacked client.
 > Download from [here](https://github.com/nepinhum/BloodicClient/releases)
 > For support and much more: visit Discord:
 
-[![Discord Banner 2](https://discordapp.com/api/guilds/1459975410812190824/widget.png?style=banner2)](https://discord.gg/gNfxDF46jX)
+<!-- [![Discord Banner 2](https://discordapp.com/api/guilds/1459975410812190824/widget.png?style=banner2)](https://discord.gg/gNfxDF46jX) -->
 
 ## Installation
 Bloodic can be installed like any other ‘Fabric’ mod:
