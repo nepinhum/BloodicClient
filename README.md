@@ -21,4 +21,4 @@ Bloodic can be installed like any other ‘Fabric’ mod:
 - [x] Multi-language support
 - [ ] And after clarifying some things; my main goal after 2.0.0-beta is to create anti-methods that can resist servers.
 
-If you have a problem you can open a [#issue!](https://github.com/nepinhum/BloodicClient/issues)
+If you have a problem you can open a [#issue!](https://codeberg.org/nepinhum/BloodicClient/issues)
